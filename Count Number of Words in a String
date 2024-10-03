@@ -1,0 +1,27 @@
+public class WordCountWithoutBuiltIn {
+    public static void main(String[] args) {
+        String text = "Java is a versatile programming language";
+        
+        int wordCount = 0;
+        boolean isWord = false;
+        int endOfLine = text.length() - 1;
+
+        for (int i = 0; i < text.length(); i++) {
+            // Check if the character is a letter
+            if (Character.isLetter(text.charAt(i)) && i != endOfLine) {
+                isWord = true;
+            } 
+            // If character is not a letter and there was a word, increment word count
+            else if (!Character.isLetter(text.charAt(i)) && isWord) {
+                wordCount++;
+                isWord = false; // Reset for the next word
+            } 
+            // If the last character is a letter, count it as a word
+            else if (i == endOfLine && isWord) {
+                wordCount++;
+            }
+        }
+
+        System.out.println("Number of words in the string: " + wordCount);
+    }
+}
