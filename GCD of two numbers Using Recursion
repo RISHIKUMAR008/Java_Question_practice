@@ -1,0 +1,18 @@
+public class GCDExample {
+
+    // Recursive method to find GCD using Euclidean algorithm
+    public static int findGCD(int a, int b) {
+        if (b == 0) {
+            return a;  // Base case
+        }
+        return findGCD(b, a % b);  // Recursive case
+    }
+
+    public static void main(String[] args) {
+        int num1 = 56;  // Example number 1
+        int num2 = 98;  // Example number 2
+
+        int gcd = findGCD(num1, num2);
+        System.out.println("GCD of " + num1 + " and " + num2 + " is: " + gcd);
+    }
+}
