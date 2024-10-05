@@ -1,0 +1,32 @@
+public class PrimeCheck {
+
+    // Method to check if a number is prime
+    public static boolean isPrime(int n) {
+        // Edge cases
+        if (n <= 1) {
+            return false;  // 0 and 1 are not prime numbers
+        }
+        if (n == 2) {
+            return true;   // 2 is the only even prime number
+        }
+        if (n % 2 == 0) {
+            return false;  // Exclude even numbers greater than 2
+        }
+        // Check divisibility from 3 to sqrt(n)
+        for (int i = 3; i * i <= n; i += 2) {
+            if (n % i == 0) {
+                return false;  // Divisible by i means not prime
+            }
+        }
+        return true;  // If no divisors found, it's prime
+    }
+
+    public static void main(String[] args) {
+        int number = 29;  // Example number
+        if (isPrime(number)) {
+            System.out.println(number + " is a prime number.");
+        } else {
+            System.out.println(number + " is not a prime number.");
+        }
+    }
+}
