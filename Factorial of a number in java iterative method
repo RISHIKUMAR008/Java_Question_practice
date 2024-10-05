@@ -1,0 +1,15 @@
+public class FactorialExample {
+    public static int factorial(int n) {
+        int fact = 1;  // Initialize result
+        for (int i = 1; i <= n; i++) {
+            fact *= i;  // Multiply fact with i
+        }
+        return fact;
+    }
+
+    public static void main(String[] args) {
+        int number = 5;  // Example number
+        int result = factorial(number);
+        System.out.println("Factorial of " + number + " is: " + result);
+    }
+}
