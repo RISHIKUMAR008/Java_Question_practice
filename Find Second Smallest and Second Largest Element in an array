@@ -60,6 +60,36 @@ public static void main(String[] args)
 	System.out.println("Second largest is "+sL);
 }
 
+
+
+
+
+
+
+import java.util.Arrays;
+
+public class SecondSmallestLargest {
+    public static void main(String[] args) {
+        int[] arr = {5, 8, 1, 4, 10, 6};
+
+        if (arr.length < 2) {
+            System.out.println("Array must have at least two elements");
+            return;
+        }
+
+        // Sort the array
+        Arrays.sort(arr);
+
+        // Find second smallest and second largest
+        int secondSmallest = arr[1]; // Second element
+        int secondLargest = arr[arr.length - 2]; // Second to last element
+
+        System.out.println("Second Smallest: " + secondSmallest);
+        System.out.println("Second Largest: " + secondLargest);
+    }
+}
+
+
 }
 
 
