@@ -1,0 +1,14 @@
+import java.io.*;
+import java.util.Arrays;
+class Test
+{
+static private void getMedian(int[] arr, int n)
+{
+	Arrays.sort(arr);
+	
+	if (n % 2 == 0)
+	{
+		int ind1 = (n / 2) - 1;
+		int ind2 = (n / 2);
+		System.out.print((double)(arr[ind1] + arr[ind2]) / 2);
+	}
