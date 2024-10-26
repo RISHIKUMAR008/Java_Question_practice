@@ -1,0 +1,31 @@
+public class EqualSumSides {
+    public static int findEquilibriumIndex(int[] arr) {
+        int totalSum = 0, leftSum = 0;
+        for (int num : arr) {
+            totalSum += num;
+        }
+        for (int i = 0; i < arr.length; i++) {
+            totalSum -= arr[i]; // now totalSum is the right sum for index i
+
+            if (leftSum == totalSum) {
+                return i; // equilibrium index found
+            }
+
+            leftSum += arr[i]; // update left sum for next index
+        }
+
+        return -1; // no equilibrium index found
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {3, 4, 8, -9, 20, 6};
+        int index = findEquilibriumIndex(arr);
+
+        if (index != -1) {
+            System.out.println("Equilibrium index is at position: " + index);
+            System.out.println("Element at equilibrium index is: " + arr[index]);
+        } else {
+            System.out.println("No equilibrium index found.");
+        }
+    }
+}
