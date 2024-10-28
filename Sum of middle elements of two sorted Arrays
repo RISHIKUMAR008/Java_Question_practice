@@ -1,0 +1,48 @@
+public class FindMidSum {
+
+    public static int findMidSum(int[] arr1, int[] arr2,
+                                 int n)
+    {
+        // Create a merged array of size 2*n
+        int[] merged = new int[2 * n];
+        int i = 0, j = 0, k = 0;
+
+        // Traverse both arrays and merge them into the
+        // merged array
+        while (i < n && j < n) {
+            if (arr1[i] <= arr2[j]) {
+                merged[k++] = arr1[i++];
+            }
+            else {
+                merged[k++] = arr2[j++];
+            }
+        }
+
+        // If there are remaining elements in arr1[], add
+        // them to merged array
+        while (i < n) {
+            merged[k++] = arr1[i++];
+        }
+
+        // If there are remaining elements in arr2[], add
+        // them to merged array
+        while (j < n) {
+            merged[k++] = arr2[j++];
+        }
+
+        // Return the sum of the middle two elements
+        return merged[n] + merged[n - 1];
+    }
+
+    public static void main(String[] args)
+    {
+        int[] arr1 = { 1, 2, 4, 6, 10 };
+        int[] arr2 = { 4, 5, 6, 9, 12 };
+        int n = arr1.length;
+
+        // Function call to find the sum of the middle
+        // elements
+        int midSum = findMidSum(arr1, arr2, n);
+        System.out.println(midSum);
+    }
+}
