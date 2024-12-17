@@ -1,3 +1,68 @@
+This Java program converts a camel case string (e.g., helloWorldExample) into a space-separated sentence (e.g., hello world example). Here's a breakdown of the code:
+
+Key Features:
+
+1. Input Handling:
+
+The program uses Scanner to take input from the user.
+
+
+
+2. Logic for Conversion:
+
+A StringBuilder is used for efficient string manipulation.
+
+The loop checks if a character is uppercase:
+
+If it is, it adds a space before appending the character.
+
+The character is then appended in lowercase form to ensure a consistent sentence case.
+
+
+
+
+3. Output:
+
+The final sentence is printed with spaces separating the words.
+
+
+
+---
+
+Example Input/Output:
+
+Input:
+
+Enter a camel case string: helloWorldExample
+
+Output:
+
+Converted sentence: hello world example
+
+
+---
+
+Edge Cases Handled:
+
+Strings starting with an uppercase letter (HelloWorld).
+
+Strings with no camel case (e.g., hello remains as hello).
+
+Strings with multiple uppercase letters in sequence are treated correctly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import java.util.Scanner;
 
 public class CamelCaseToSentence {
