@@ -1,0 +1,27 @@
+import java.util.Scanner;
+
+public class CamelCaseToSentence {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter a camel case string: ");
+        String camelCaseString = scanner.nextLine();
+
+        String sentence = convertCamelCaseToSentence(camelCaseString);
+        System.out.println("Converted sentence: " + sentence);
+
+        scanner.close();
+    }
+
+    public static String convertCamelCaseToSentence(String camelCaseString) {
+        StringBuilder sentence = new StringBuilder();
+        for (int i = 0; i < camelCaseString.length(); i++) {
+            char ch = camelCaseString.charAt(i);
+            if (i > 0 && Character.isUpperCase(ch)) {
+                sentence.append(' '); // Add a space before each uppercase letter
+            }
+            sentence.append(Character.toLowerCase(ch));
+        }
+        return sentence.toString();
+    }
+}
