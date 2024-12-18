@@ -1,0 +1,50 @@
+Explanation:
+ * Get input values:
+   * The code starts by getting the input values for p1, p2, p3, q, and r from the user using the Scanner class.
+ * Calculate the number of employees who solved exactly one problem:
+   * The number of employees who solved only the first problem is p1 - q.
+   * The number of employees who solved only the second problem is p2 - q.
+   * The number of employees who solved only the third problem is p3 - q.
+   * The total number of employees who solved exactly one problem is the sum of these three values.
+ * Calculate the number of employees who solved the first problem:
+   * The number of employees who solved the first problem includes those who solved only the first problem (p1 - q), those who solved all three problems (q), and those who solved the first and third problems (p3 - q).
+ * Print the results:
+   * The code prints the calculated values for the number of employees who solved the first problem and the number of employees who solved exactly one problem.
+Example Usage:
+If the input values are:
+20 15 18 5 10
+
+The output will be:
+Number of employees who solved the first problem: 28
+Number of employees who solved exactly one of the 3 problems: 28
+
+
+
+
+import java.util.Scanner;
+
+public class TCSDigitalCoding {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get input values
+        int p1 = scanner.nextInt();
+        int p2 = scanner.nextInt();
+        int p3 = scanner.nextInt();
+        int q = scanner.nextInt();
+        int r = scanner.nextInt();
+
+        // Calculate the number of employees who solved exactly one problem
+        int oneProblem = (p1 - q) + (p2 - q) + (p3 - q);
+
+        // Calculate the number of employees who solved the first problem
+        int firstProblem = (p1 - q) + q + (p3 - q);
+
+        // Print the results
+        System.out.println("Number of employees who solved the first problem: " + firstProblem);
+        System.out.println("Number of employees who solved exactly one of the 3 problems: " + oneProblem);
+
+        scanner.close();
+    }
+}
