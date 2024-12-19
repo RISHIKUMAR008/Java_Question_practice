@@ -1,0 +1,63 @@
+Explanation:
+
+1. Input: The program takes an integer a as input.
+
+
+2. Logic:
+
+Start from b = 10 since b must have more than one digit.
+
+Calculate the product of digits of b using the productOfDigits method.
+
+If the product equals a, print b and exit the loop.
+
+Otherwise, increment b and repeat.
+
+
+
+3. Output: The smallest b for which the product of its digits equals a.
+
+
+
+Example:
+
+Input:
+a = 10
+
+Output:
+Smallest integer b: 25
+
+
+
+
+
+
+import java.util.Scanner;
+
+public class SmallestIntegerB {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the value of a: ");
+        int a = scanner.nextInt();
+        
+        // Finding the smallest integer b
+        int b = 10; // Start from the smallest two-digit number
+        while (true) {
+            if (productOfDigits(b) == a) {
+                System.out.println("Smallest integer b: " + b);
+                break;
+            }
+            b++;
+        }
+    }
+    
+    // Method to calculate the product of digits of a number
+    private static int productOfDigits(int num) {
+        int product = 1;
+        while (num > 0) {
+            product *= (num % 10);
+            num /= 10;
+        }
+        return product;
+    }
+}
