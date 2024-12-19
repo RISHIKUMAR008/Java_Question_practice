@@ -1,0 +1,35 @@
+Java code that addresses the network marketing profit calculation problem, incorporating improvements based on the insights from the rating
+
+
+
+import java.util.*;
+
+public class NetworkMarketingProfit {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get input: number of levels (N) and profit percentage
+        int N = scanner.nextInt();
+        int profitPercentage = scanner.nextInt();
+
+        // Calculate profit for each level
+        double[] levelProfits = new double[N + 1];
+        levelProfits[0] = 1; // Root node starts with 100% profit
+
+        for (int i = 1; i <= N; i++) {
+            levelProfits[i] = levelProfits[i - 1] * (profitPercentage / 100.0);
+        }
+
+        // Calculate total profit at root node
+        double totalProfit = 0;
+        for (double profit : levelProfits) {
+            totalProfit += profit;
+        }
+
+        // Round total profit to the nearest integer
+        int roundedProfit = (int) Math.round(totalProfit);
+
+        System.out.println(roundedProfit);
+    }
+}
