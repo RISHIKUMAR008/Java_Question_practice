@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class FootballLeagueWinner {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        Map<Character, Integer> teamPoints = new HashMap<>();
+        for (char team = 'A'; team <= 'Z' && team <= 'A' + n - 1; team++) {
+            teamPoints.put(team, 0);
+        }
+        for (int i = 0; i < n * (n - 1) / 2; i++) {
+            char team1 = scanner.next().charAt(0);
+            char team2 = scanner.next().charAt(0);
+            String score = scanner.next();
+
+            if (score.equals("W")) {
+                teamPoints.put(team1, teamPoints.get(team1) + 3);
+            } else if (score.equals("D")) {
+                teamPoints.put(team1, teamPoints.get(team1) + 1);
+                teamPoints.put(team2, teamPoints.get(team2) + 1);
+            }
+        }
+        char winner = 'A';
+        int maxPoints = 0;
+        for (Map.Entry<Character, Integer> entry : teamPoints.entrySet()) {
+            if (entry.getValue() > maxPoints) {
+                maxPoints = entry.getValue();
+                winner = entry.getKey();
+            }
+        }
+
+        // Print the winner and points
+        System.out.println(winner + " " + maxPoints);
+
+        scanner.close();
+    }
+}
