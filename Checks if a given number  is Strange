@@ -1,3 +1,29 @@
+Explanation:
+ * isPrime(int n):
+   * Checks if a given number n is prime.
+   * Returns true if prime, false otherwise.
+ * isStrange(int n):
+   * Finds the greatest prime factor of n.
+   * Compares the square root of n with the greatest prime factor.
+   * Returns true if the square root is less than the greatest prime factor, false otherwise.
+ * main(String[] args):
+   * Takes input from the user.
+   * Calls isStrange() to determine if the number is strange.
+   * Prints the result.
+This code efficiently determines whether a given number is a strange number based on the provided definition
+
+
+
+
+
+
+
+
+
+
+
+
+
 import java.util.Scanner;
 
 public class StrangeNumber {
