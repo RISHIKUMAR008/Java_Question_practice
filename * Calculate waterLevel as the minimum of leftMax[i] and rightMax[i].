@@ -1,0 +1,67 @@
+Explanation:
+ * Initialization:
+   * n is the length of the height array.
+   * leftMax array stores the maximum height to the left of each index.
+   * rightMax array stores the maximum height to the right of each index.
+ * Calculate leftMax:
+   * leftMax[0] is initialized with height[0].
+   * Iterate from index 1 to n - 1:
+     * Update leftMax[i] with the maximum of leftMax[i - 1] and height[i].
+ * Calculate rightMax:
+   * rightMax[n - 1] is initialized with height[n - 1].
+   * Iterate from index n - 2 to 0:
+     * Update rightMax[i] with the maximum of rightMax[i + 1] and height[i].
+ * Calculate Total Water:
+   * Iterate through the height array:
+     * Calculate waterLevel as the minimum of leftMax[i] and rightMax[i].
+     * If waterLevel is greater than height[i], calculate the water trapped at index i as waterLevel - height[i].
+     * Add the trapped water at index i to the totalWater.
+ * Return totalWater:
+   * Return the total amount of water trapped.
+Time Complexity: O(n)
+ * The code iterates through the array once to calculate leftMax, once to calculate rightMax, and once to calculate the total water.
+Space Complexity: O(n)
+ * The code uses two additional arrays (leftMax and rightMax) to store the maximum heights on either side of each index.
+
+
+
+
+
+
+
+
+
+public class TrappingRainWater {
+    public static int trap(int[] height) {
+        int n = height.length;
+        if (n == 0) {
+            return 0;
+        }
+
+        int[] leftMax = new int[n];
+        leftMax[0] = height[0];
+        for (int i = 1; i < n; i++) {
+            leftMax[i] = Math.max(leftMax[i - 1], height[i]);
+        }
+
+        int[] rightMax = new int[n];
+        rightMax[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--) {
+            rightMax[i] = Math.max(rightMax[i + 1], height[i]);
+        }
+
+        int totalWater = 0;
+        for (int i = 0; i < n; i++) {
+            int waterLevel = Math.min(leftMax[i], rightMax[i]);
+            totalWater += Math.max(0, waterLevel - height[i]);
+        }
+
+        return totalWater;
+    }
+
+    public static void main(String[] args) {
+        int[] height = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        int trappedWater = trap(height);
+        System.out.println("Total water trapped: " + trappedWater);
+    }
+}
