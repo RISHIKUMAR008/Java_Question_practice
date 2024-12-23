@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class BinaryStringRearrangement {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the length of the strings
+        int length = scanner.nextInt();
+
+        // Read the first binary string
+        String str1 = scanner.next();
+
+        // Read the second binary string
+        String str2 = scanner.next();
+
+        // Check if the strings can be rearranged to be equal
+        if (canRearrangeToEqual(str1, str2)) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+
+        scanner.close();
+    }
+
+    private static boolean canRearrangeToEqual(String str1, String str2) {
+        // Count the number of '0's and '1's in both strings
+        int count0Str1 = 0, count1Str1 = 0;
+        int count0Str2 = 0, count1Str2 = 0;
+
+        for (char c : str1.toCharArray()) {
+            if (c == '0') {
+                count0Str1++;
+            } else if (c == '1') {
+                count1Str1++;
+            }
+        }
+
+        for (char c : str2.toCharArray()) {
+            if (c == '0') {
+                count0Str2++;
+            } else if (c == '1') {
+                count1Str2++;
+            }
+        }
+
+        // The strings can be rearranged to be equal if they have the same count of '0's and '1's
+        return count0Str1 == count0Str2 && count1Str1 == count1Str2;
+    }
+}
