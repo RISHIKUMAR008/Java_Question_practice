@@ -1,0 +1,40 @@
+import java.util.Arrays;
+
+public class Solution {
+    public static int[] searchRange(int[] nums, int target) {
+        int[] result = new int[2];
+        result[0] = findBoundary(nums, target, true);
+        result[1] = findBoundary(nums, target, false);
+        return result;
+    }
+
+    private static int findBoundary(int[] nums, int target, boolean isLeft) {
+        int left = 0, right = nums.length - 1;
+        int boundary = -1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (nums[mid] == target) {
+                boundary = mid;
+                if (isLeft) {
+                    right = mid - 1; // Search left
+                } else {
+                    left = mid + 1; // Search right
+                }
+            } else if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        
+        return boundary;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(Arrays.toString(searchRange(new int[]{5, 7, 7, 8, 8, 10}, 8))); // Output: [3, 4]
+        System.out.println(Arrays.toString(searchRange(new int[]{5, 7, 7, 8, 8, 10}, 6))); // Output: [-1, -1]
+        System.out.println(Arrays.toString(searchRange(new int[]{}, 0)));                // Output: [-1, -1]
+    }
+}
