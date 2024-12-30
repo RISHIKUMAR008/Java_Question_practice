@@ -1,0 +1,62 @@
+Input: digits = "23"
+Output: ["ad","ae","af","bd","be","bf","cd","ce","cf"]
+
+
+
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LetterCombinations {
+    public List<String> letterCombinations(String digits) {
+        if (digits == null || digits.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        // Mapping of digits to letters
+        String[] phoneMap = {
+            "",     // 0 (not used)
+            "",     // 1 (not used)
+            "abc",  // 2
+            "def",  // 3
+            "ghi",  // 4
+            "jkl",  // 5
+            "mno",  // 6
+            "pqrs", // 7
+            "tuv",  // 8
+            "wxyz"  // 9
+        };
+
+        List<String> result = new ArrayList<>();
+        backtrack(digits, 0, phoneMap, new StringBuilder(), result);
+        return result;
+    }
+
+    private void backtrack(String digits, int index, String[] phoneMap, StringBuilder path, List<String> result) {
+        // Base case: if the path length matches the digits length, add to result
+        if (index == digits.length()) {
+            result.add(path.toString());
+            return;
+        }
+
+        // Get the letters corresponding to the current digit
+        String possibleLetters = phoneMap[digits.charAt(index) - '0'];
+        
+        // Iterate over each letter and recurse
+        for (char letter : possibleLetters.toCharArray()) {
+            path.append(letter); // Choose
+            backtrack(digits, index + 1, phoneMap, path, result); // Explore
+            path.deleteCharAt(path.length() - 1); // Un-choose
+        }
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        LetterCombinations lc = new LetterCombinations();
+        System.out.println(lc.letterCombinations("23")); // Output: [ad, ae, af, bd, be, bf, cd, ce, cf]
+        System.out.println(lc.letterCombinations(""));   // Output: []
+        System.out.println(lc.letterCombinations("2"));  // Output: [a, b, c]
+    }
+}
