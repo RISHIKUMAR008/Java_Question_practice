@@ -1,0 +1,57 @@
+Explanation:
+Input:
+
+Number of vehicles.
+Last digits of the registration numbers.
+The date.
+Fine amount (X).
+Logic:
+
+If the date is odd, vehicles with even last digits are fined.
+If the date is even, vehicles with odd last digits are fined.
+Output:
+
+The total fine collected for the day.
+You can run this program and provide the required inputs to get the result.
+
+
+
+
+
+import java.util.Scanner;
+
+public class OddEvenFine {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input the number of vehicles
+        System.out.print("Enter the number of vehicles: ");
+        int n = sc.nextInt();
+
+        // Input the last digits of registration numbers
+        int[] registrationNumbers = new int[n];
+        System.out.print("Enter the last digits of the registration numbers: ");
+        for (int i = 0; i < n; i++) {
+            registrationNumbers[i] = sc.nextInt();
+        }
+
+        // Input the date and the fine amount
+        System.out.print("Enter the date (D): ");
+        int date = sc.nextInt();
+        System.out.print("Enter the fine amount (X): ");
+        int fine = sc.nextInt();
+
+        int totalFine = 0;
+
+        // Calculate the total fine
+        for (int num : registrationNumbers) {
+            // Odd date should have odd last digits; even date should have even last digits
+            if ((date % 2 == 0 && num % 2 != 0) || (date % 2 != 0 && num % 2 == 0)) {
+                totalFine += fine;
+            }
+        }
+
+        // Output the total fine
+        System.out.println("Total fine collected: " + totalFine);
+    }
+}
