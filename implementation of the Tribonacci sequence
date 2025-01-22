@@ -1,0 +1,32 @@
+public class Tribonacci {
+    public static int tribonacci(int n) {
+        // Base cases
+        if (n == 0) return 0;
+        if (n == 1 || n == 2) return 1;
+
+        // Initialize the first three Tribonacci numbers
+        int t0 = 0, t1 = 1, t2 = 1;
+
+        // Variable to store the result
+        int tn = 0;
+
+        // Calculate the nth Tribonacci number iteratively
+        for (int i = 3; i <= n; i++) {
+            tn = t0 + t1 + t2;
+            t0 = t1;
+            t1 = t2;
+            t2 = tn;
+        }
+
+        return tn;
+    }
+
+    public static void main(String[] args) {
+        // Test cases
+        int n1 = 4;
+        int n2 = 25;
+
+        System.out.println("T(" + n1 + ") = " + tribonacci(n1)); // Output: 4
+        System.out.println("T(" + n2 + ") = " + tribonacci(n2)); // Output: 1389537
+    }
+}
