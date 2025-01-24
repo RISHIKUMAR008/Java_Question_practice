@@ -1,0 +1,23 @@
+public class MissingNumber {
+    public static int findMissingNumber(int[] nums) {
+        int n = nums.length;
+        int expectedSum = (n * (n + 1)) / 2; // Sum of first n natural numbers
+        int actualSum = 0;
+
+        for (int num : nums) {
+            actualSum += num; // Sum of elements in the array
+        }
+
+        return expectedSum - actualSum; // The difference is the missing number
+    }
+
+    public static void main(String[] args) {
+        // Example 1
+        int[] nums1 = {3, 0, 1};
+        System.out.println(findMissingNumber(nums1)); // Output: 2
+
+        // Example 2
+        int[] nums2 = {0, 1};
+        System.out.println(findMissingNumber(nums2)); // Output: 2
+    }
+}
