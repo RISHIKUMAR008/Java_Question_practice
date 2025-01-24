@@ -1,0 +1,65 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class RemoveComments {
+    public static List<String> removeComments(String[] source) {
+        List<String> result = new ArrayList<>();
+        boolean inBlock = false;
+        StringBuilder newLine = new StringBuilder();
+
+        for (String line : source) {
+            int i = 0;
+            if (!inBlock) newLine = new StringBuilder(); // Start a new line if not in block comment
+
+            while (i < line.length()) {
+                if (!inBlock && i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '*') {
+                    // Start of block comment
+                    inBlock = true;
+                    i += 2;
+                } else if (inBlock && i + 1 < line.length() && line.charAt(i) == '*' && line.charAt(i + 1) == '/') {
+                    // End of block comment
+                    inBlock = false;
+                    i += 2;
+                } else if (!inBlock && i + 1 < line.length() && line.charAt(i) == '/' && line.charAt(i + 1) == '/') {
+                    // Line comment
+                    break; // Ignore the rest of the line
+                } else if (!inBlock) {
+                    // Normal character
+                    newLine.append(line.charAt(i));
+                    i++;
+                } else {
+                    // Inside block comment, skip
+                    i++;
+                }
+            }
+
+            if (!inBlock && newLine.length() > 0) {
+                result.add(newLine.toString()); // Add the processed line if it's not empty
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String[] source = {
+            "/*Test program */",
+            "int main()",
+            "{ ",
+            "  // variable declaration ",
+            "int a, b, c;",
+            "/* This is a test",
+            "   multiline  ",
+            "   comment for ",
+            "   testing */",
+            "a = b + c;",
+            "}"
+        };
+
+        List<String> output = removeComments(source);
+
+        for (String line : output) {
+            System.out.println(line);
+        }
+    }
+}
