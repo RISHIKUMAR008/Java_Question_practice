@@ -1,0 +1,22 @@
+class Solution {
+    public int bulbSwitch(int n) {
+        // The number of bulbs that remain on is the count of perfect squares <= n
+        return (int) Math.sqrt(n);
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Example 1
+        System.out.println(solution.bulbSwitch(3)); // Output: 1
+
+        // Example 2
+        System.out.println(solution.bulbSwitch(0)); // Output: 0
+
+        // Example 3
+        System.out.println(solution.bulbSwitch(1)); // Output: 1
+
+        // Additional Example
+        System.out.println(solution.bulbSwitch(25)); // Output: 5 (1, 4, 9, 16, 25)
+    }
+}
