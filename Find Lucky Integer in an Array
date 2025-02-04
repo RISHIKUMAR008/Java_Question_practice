@@ -1,0 +1,29 @@
+import java.util.HashMap;
+
+public class LuckyInteger {
+    public static int findLucky(int[] arr) {
+        HashMap<Integer, Integer> frequency = new HashMap<>();
+
+        // Count the frequency of each number
+        for (int num : arr) {
+            frequency.put(num, frequency.getOrDefault(num, 0) + 1);
+        }
+
+        int largestLucky = -1;
+
+        // Check for lucky integers
+        for (int num : frequency.keySet()) {
+            if (num == frequency.get(num)) {
+                largestLucky = Math.max(largestLucky, num);
+            }
+        }
+
+        return largestLucky;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findLucky(new int[]{2, 2, 3, 4}));      // Output: 2
+        System.out.println(findLucky(new int[]{1, 2, 2, 3, 3, 3})); // Output: 3
+        System.out.println(findLucky(new int[]{2, 2, 2, 3, 3}));    // Output: -1
+    }
+}
