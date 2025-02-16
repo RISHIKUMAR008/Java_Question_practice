@@ -1,0 +1,21 @@
+class Solution {
+    public double average(int[] salary) {
+        int minSalary = Integer.MAX_VALUE;
+        int maxSalary = Integer.MIN_VALUE;
+        int sum = 0;
+
+        for (int sal : salary) {
+            minSalary = Math.min(minSalary, sal);
+            maxSalary = Math.max(maxSalary, sal);
+            sum += sal;
+        }
+
+        return (double) (sum - minSalary - maxSalary) / (salary.length - 2);
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.printf("%.5f\n", sol.average(new int[]{4000, 3000, 1000, 2000})); // Output: 2500.00000
+        System.out.printf("%.5f\n", sol.average(new int[]{1000, 2000, 3000})); // Output: 2000.00000
+    }
+}
