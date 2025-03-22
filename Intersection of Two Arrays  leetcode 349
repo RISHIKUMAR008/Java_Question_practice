@@ -1,0 +1,61 @@
+Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique and you may return the result in any order.
+
+Example 1:
+
+Input: nums1 = [1,2,2,1], nums2 = [2,2]
+Output: [2]
+
+
+import java.util.ArrayList;
+
+public class ArrayIntersection {
+    public static int[] intersection(int[] nums1, int[] nums2) {
+        ArrayList<Integer> resultList = new ArrayList<>();
+        
+        // Iterate through the first array
+        for (int i = 0; i < nums1.length; i++) {
+            boolean isInNums2 = false;
+            boolean isAlreadyInResult = false;
+
+            // Check if nums1[i] exists in nums2
+            for (int j = 0; j < nums2.length; j++) {
+                if (nums1[i] == nums2[j]) {
+                    isInNums2 = true;
+                    break;
+                }
+            }
+
+            // Check if nums1[i] is already in the result list
+            for (int k = 0; k < resultList.size(); k++) {
+                if (nums1[i] == resultList.get(k)) {
+                    isAlreadyInResult = true;
+                    break;
+                }
+            }
+
+            // Add nums1[i] to result if it exists in nums2 and is not already in the result
+            if (isInNums2 && !isAlreadyInResult) {
+                resultList.add(nums1[i]);
+            }
+        }
+
+        // Convert result list to array
+        int[] result = new int[resultList.size()];
+        for (int i = 0; i < resultList.size(); i++) {
+            result[i] = resultList.get(i);
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        int[] nums1 = {1, 2, 2, 1};
+        int[] nums2 = {2, 2};
+        int[] result = intersection(nums1, nums2);
+
+        // Print the result
+        for (int num : result) {
+            System.out.print(num + " "); // Output: 2
+        }
+    }
+}
