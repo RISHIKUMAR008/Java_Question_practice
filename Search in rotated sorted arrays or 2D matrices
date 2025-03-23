@@ -1,0 +1,33 @@
+public class SearchIn2DMatrix {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0 || matrix[0].length == 0) {
+            return false;
+        }
+
+        int row = 0, col = matrix[0].length - 1;
+
+        while (row < matrix.length && col >= 0) {
+            if (matrix[row][col] == target) {
+                return true;
+            } else if (matrix[row][col] > target) {
+                col--; // Move left
+            } else {
+                row++; // Move down
+            }
+        }
+
+        return false; // Target not found
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        SearchIn2DMatrix solution = new SearchIn2DMatrix();
+        int[][] matrix = {
+            {1, 3, 5},
+            {7, 10, 11},
+            {12, 14, 16}
+        };
+        int target = 14;
+        System.out.println(solution.searchMatrix(matrix, target)); // Output: true
+    }
+}
