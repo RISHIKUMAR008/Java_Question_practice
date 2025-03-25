@@ -1,0 +1,42 @@
+class MyAtoi {
+    public static int myAtoi(String s) {
+        // Step 1: Trim leading and trailing whitespace
+        s = s.trim();
+
+        // Step 2: Check if the string is empty after trimming
+        if (s.isEmpty()) {
+            return 0;
+        }
+
+        // Step 3: Parse the integer
+        int sign = 1;
+        int i = 0;
+        if (s.charAt(0) == '-') {
+            sign = -1;
+            i++;
+        } else if (s.charAt(0) == '+') {
+            i++;
+        }
+
+        // Step 4: Convert the digits
+        long num = 0; // Use long to detect overflow
+        while (i < s.length() && Character.isDigit(s.charAt(i))) {
+            num = num * 10 + (s.charAt(i) - '0');
+
+            // Step 5: Handle overflow
+            if (sign * num > Integer.MAX_VALUE) {
+                return Integer.MAX_VALUE;
+            } else if (sign * num < Integer.MIN_VALUE) {
+                return Integer.MIN_VALUE;
+            }
+
+            i++;
+        }
+
+        return (int) (sign * num);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(myAtoi("42"));          // Output: 42
+        System.out.println(myAtoi("   -42"));      // Output: -42
+        System.out.println(myAtoi("4193 with w
