@@ -1,0 +1,79 @@
+Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+The testcases will be generated such that the answer is unique.
+
+Example 1:
+
+Input: s = "ADOBECODEBANC", t = "ABC"
+Output: "BANC"
+Explanation: The minimum window substring "BANC" includes 'A', 'B', and 'C' from string t.
+Example 2:
+
+Input: s = "a", t = "a"
+Output: "a"
+Explanation: The entire string s is the minimum window.
+Example 3:
+
+Input: s = "a", t = "aa"
+Output: ""
+Explanation: Both 'a's from t must be included in the window.
+Since the largest window of s only has one 'a', return empty string.
+
+
+
+
+
+
+
+
+import java.util.*;
+
+public class MinWindowSubstring {
+    public static String minWindow(String s, String t) {
+        if (s.length() < t.length()) return "";
+
+        // Store frequency of characters in t
+        Map<Character, Integer> targetMap = new HashMap<>();
+        for (char c : t.toCharArray()) {
+            targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
+        }
+
+        int left = 0, right = 0, minLen = Integer.MAX_VALUE, startIndex = 0;
+        int required = targetMap.size(), formed = 0;
+        Map<Character, Integer> windowMap = new HashMap<>();
+
+        while (right < s.length()) {
+            char c = s.charAt(right);
+            windowMap.put(c, windowMap.getOrDefault(c, 0) + 1);
+
+            if (targetMap.containsKey(c) && windowMap.get(c).intValue() == targetMap.get(c).intValue()) {
+                formed++;
+            }
+
+            // Try to shrink the window
+            while (formed == required) {
+                if (right - left + 1 < minLen) {
+                    minLen = right - left + 1;
+                    startIndex = left;
+                }
+
+                char leftChar = s.charAt(left);
+                windowMap.put(leftChar, windowMap.get(leftChar) - 1);
+                if (targetMap.containsKey(leftChar) && windowMap.get(leftChar) < targetMap.get(leftChar)) {
+                    formed--;
+                }
+                left++;
+            }
+
+            right++;
+        }
+
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(startIndex, startIndex + minLen);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(minWindow("ADOBECODEBANC", "ABC")); // Output: "BANC"
+        System.out.println(minWindow("a", "a")); // Output: "a"
+        System.out.println(minWindow("a", "aa")); // Output: ""
+    }
+}
