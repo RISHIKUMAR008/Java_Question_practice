@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class WordPattern {
+    public static boolean wordPattern(String pattern, String s) {
+        String[] words = s.split(" ");
+        if (pattern.length() != words.length) return false;
+
+        Map<Character, String> mapPatternToWord = new HashMap<>();
+        Map<String, Character> mapWordToPattern = new HashMap<>();
+
+        for (int i = 0; i < pattern.length(); i++) {
+            char c = pattern.charAt(i);
+            String word = words[i];
+
+            // Check if pattern -> word mapping is consistent
+            if (mapPatternToWord.containsKey(c)) {
+                if (!mapPatternToWord.get(c).equals(word)) return false;
+            } else {
+                mapPatternToWord.put(c, word);
+            }
+
+            // Check if word -> pattern mapping is consistent
+            if (mapWordToPattern.containsKey(word)) {
+                if (mapWordToPattern.get(word) != c) return false;
+            } else {
+                mapWordToPattern.put(word, c);
+            }
+        }
+
+        return true;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(wordPattern("abba", "dog cat cat dog")); // true
+        System.out.println(wordPattern("abba", "dog cat cat fish")); // false
+        System.out.println(wordPattern("aaaa", "dog cat cat dog")); // false
+        System.out.println(wordPattern("abba", "dog dog dog dog")); // false
+    }
+}
