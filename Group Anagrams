@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class GroupAnagrams {
+    public static List<List<String>> groupAnagrams(String[] strs) {
+        Map<String, List<String>> map = new HashMap<>();
+
+        for (String str : strs) {
+            // Sort the string to use as a key
+            char[] charArray = str.toCharArray();
+            Arrays.sort(charArray);
+            String sortedStr = new String(charArray);
+
+            // Add the word to the corresponding anagram group
+            map.computeIfAbsent(sortedStr, k -> new ArrayList<>()).add(str);
+        }
+
+        return new ArrayList<>(map.values());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(groupAnagrams(new String[]{"eat", "tea", "tan", "ate", "nat", "bat"}));
+        System.out.println(groupAnagrams(new String[]{""}));
+        System.out.println(groupAnagrams(new String[]{"a"}));
+    }
+}
