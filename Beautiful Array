@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class BeautifulArrayGenerator {
+    public int[] beautifulArray(int n) {
+        List<Integer> result = new ArrayList<>();
+        result.add(1);
+
+        while (result.size() < n) {
+            List<Integer> temp = new ArrayList<>();
+
+            // Build the odd elements: 2*x - 1
+            for (int num : result) {
+                int val = 2 * num - 1;
+                if (val <= n) temp.add(val);
+            }
+
+            // Build the even elements: 2*x
+            for (int num : result) {
+                int val = 2 * num;
+                if (val <= n) temp.add(val);
+            }
+
+            result = temp;
+        }
+
+        // Convert List to int[]
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            arr[i] = result.get(i);
+        }
+
+        return arr;
+    }
+
+    // Example usage
+    public static void main(String[] args) {
+        BeautifulArrayGenerator bag = new BeautifulArrayGenerator();
+        System.out.println(Arrays.toString(bag.beautifulArray(4))); // Example: [2, 1, 4, 3]
+        System.out.println(Arrays.toString(bag.beautifulArray(5))); // Example: [3, 1, 2, 5, 4]
+    }
+}
