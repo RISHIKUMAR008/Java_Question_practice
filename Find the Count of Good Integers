@@ -1,0 +1,77 @@
+import java.math.BigInteger;
+import java.util.*;
+
+public class GoodKPalindromes {
+
+    static int[][] comb = new int[11][11];
+
+    static {
+        for (int i = 0; i <= 10; i++) {
+            comb[i][0] = comb[i][i] = 1;
+        }
+        for (int i = 2; i <= 10; i++) {
+            for (int j = 1; j < i; j++) {
+                comb[i][j] = comb[i - 1][j] + comb[i - 1][j - 1];
+            }
+        }
+    }
+
+    public static int countGoodIntegers(int n, int k) {
+        int base = (int) Math.pow(10, (n + 1) / 2);
+        Set<String> seen = new HashSet<>();
+
+        for (int half = base / 10; half < base; half++) {
+            String halfStr = String.valueOf(half);
+            String fullStr;
+            if (n % 2 == 0) {
+                fullStr = halfStr + new StringBuilder(halfStr).reverse().toString();
+            } else {
+                fullStr = halfStr + new StringBuilder(halfStr.substring(0, halfStr.length() - 1)).reverse().toString();
+            }
+
+            BigInteger num = new BigInteger(fullStr);
+            if (!num.mod(BigInteger.valueOf(k)).equals(BigInteger.ZERO)) continue;
+
+            int[] freq = new int[10];
+            for (char ch : fullStr.toCharArray()) {
+                freq[ch - '0']++;
+            }
+
+            BigInteger encoded = BigInteger.ZERO;
+            for (int f : freq) {
+                encoded = encoded.multiply(BigInteger.valueOf(11)).add(BigInteger.valueOf(f));
+            }
+            seen.add(encoded.toString());
+        }
+
+        BigInteger total = BigInteger.ZERO;
+        for (String codeStr : seen) {
+            BigInteger code = new BigInteger(codeStr);
+            int[] freq = new int[10];
+            for (int i = 9; i >= 0; i--) {
+                freq[i] = code.mod(BigInteger.valueOf(11)).intValue();
+                code = code.divide(BigInteger.valueOf(11));
+            }
+
+            int rem = n;
+            BigInteger ways = BigInteger.ONE;
+
+            for (int i = 0; i < 10; i++) {
+                if (freq[i] > rem) {
+                    ways = BigInteger.ZERO;
+                    break;
+                }
+                int choices = (i == 0) ? comb[rem - 1][freq[i]] : comb[rem][freq[i]];
+                ways = ways.multiply(BigInteger.valueOf(choices));
+                rem -= freq[i];
+            }
+            total = total.add(ways);
+        }
+
+        return total.intValue();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(countGoodIntegers(3, 5)); // Output: 27
+    }
+}
