@@ -1,0 +1,38 @@
+import java.util.Arrays;
+
+public class ArrayWrapper {
+    private int[] arr;
+
+    public ArrayWrapper(int[] arr) {
+        this.arr = arr;
+    }
+
+    // Custom method to simulate "+" operator (since Java doesn't support operator overloading)
+    public int add(ArrayWrapper other) {
+        return this.sum() + other.sum();
+    }
+
+    // Sum of elements in the array
+    private int sum() {
+        int total = 0;
+        for (int num : arr) {
+            total += num;
+        }
+        return total;
+    }
+
+    // Overrides toString to return "[1,2,3]" format
+    @Override
+    public String toString() {
+        return Arrays.toString(arr);
+    }
+
+    // For demonstration purposes
+    public static void main(String[] args) {
+        ArrayWrapper obj1 = new ArrayWrapper(new int[]{1, 2});
+        ArrayWrapper obj2 = new ArrayWrapper(new int[]{3, 4});
+
+        System.out.println("Sum: " + obj1.add(obj2)); // Output: Sum: 10
+        System.out.println("String: " + obj1);         // Output: String: [1, 2]
+    }
+}
