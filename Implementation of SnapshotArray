@@ -1,0 +1,30 @@
+import java.util.*;
+
+class SnapshotArray {
+    private List<TreeMap<Integer, Integer>> snapshots;
+    private int snapId;
+
+    public SnapshotArray(int length) {
+        snapshots = new ArrayList<>();
+        for (int i = 0; i < length; i++) {
+            TreeMap<Integer, Integer> map = new TreeMap<>();
+            map.put(0, 0); // Initialize with snapId 0 and value 0
+            snapshots.add(map);
+        }
+        snapId = 0;
+    }
+
+    public void set(int index, int val) {
+        snapshots.get(index).put(snapId, val);
+    }
+
+    public int snap() {
+        return snapId++;
+    }
+
+    public int get(int index, int snap_id) {
+        TreeMap<Integer, Integer> map = snapshots.get(index);
+        // Find the greatest key <= snap_id
+        return map.floorEntry(snap_id).getValue();
+    }
+}
