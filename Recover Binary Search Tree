@@ -1,0 +1,45 @@
+class Solution {
+    public void recoverTree(TreeNode root) {
+        TreeNode first = null, second = null, prev = null;
+        TreeNode curr = root, pred = null;
+
+        while (curr != null) {
+            if (curr.left != null) {
+                // Find the inorder predecessor of curr
+                pred = curr.left;
+                while (pred.right != null && pred.right != curr) {
+                    pred = pred.right;
+                }
+
+                if (pred.right == null) {
+                    // Make curr as the right child of its inorder predecessor
+                    pred.right = curr;
+                    curr = curr.left;
+                } else {
+                    // Revert the changes (threading)
+                    if (prev != null && prev.val > curr.val) {
+                        if (first == null) first = prev;
+                        second = curr;
+                    }
+                    pred.right = null;
+                    prev = curr;
+                    curr = curr.right;
+                }
+            } else {
+                if (prev != null && prev.val > curr.val) {
+                    if (first == null) first = prev;
+                    second = curr;
+                }
+                prev = curr;
+                curr = curr.right;
+            }
+        }
+
+        // Swap the values of the two nodes
+        if (first != null && second != null) {
+            int temp = first.val;
+            first.val = second.val;
+            second.val = temp;
+        }
+    }
+}
