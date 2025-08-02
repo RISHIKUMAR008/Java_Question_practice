@@ -1,0 +1,26 @@
+class GfG {
+    public static boolean searchMatrix(int[][] mat, int x) {
+        int n = mat.length;
+        int m = mat[0].length;
+
+        // traverse every element in the matrix
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (mat[i][j] == x)
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String[] args) {
+        int[][] mat = {
+            {1, 5, 9},
+            {14, 20, 21},
+            {30, 34, 43}
+        };
+        int x = 14;
+        System.out.println(searchMatrix(mat, x) ? "true" : "false");
+    }
+}
